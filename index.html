@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merrick Global Talent Licensing Route Finder</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Import a modern sans‑serif font for a polished, magazine‑style look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header class="app-header">
+      <!-- Brand logo pulled from the uploaded assets. The logo already conveys the company name so the page title can be shorter. -->
+      <img src="logo.png" class="logo" alt="Merrick Global Talent logo">
+      <h1>Licensing Route Finder</h1>
+      <p class="subtitle">
+        Find your personalised route to medical licensing based on your background and qualifications.
+      </p>
+    </header>
+    <main class="container">
+      <section id="input-section" class="card">
+        <h2>Your Background</h2>
+        <!-- Guidance for users on how to use the tool. Click the arrow to expand. -->
+        <details class="info-card" open>
+          <summary>How to use this tool</summary>
+          <p>
+            Choose your current country, where you want to practise, your specialty and qualifications, then enter your years of post‑certification experience. Click
+            <strong>Generate route</strong> to see the recommended steps for licensure. Use
+            <strong>Check for updates</strong> to ensure you have the latest information.<!-- Analytics are hidden for external users -->
+          </p>
+        </details>
+        <form id="route-form">
+          <div class="form-row">
+            <label for="incomingCountry">Current country:</label>
+            <select id="incomingCountry" name="incomingCountry"></select>
+          </div>
+          <div class="form-row">
+            <label for="destinationCountry">Destination country:</label>
+            <select id="destinationCountry" name="destinationCountry"></select>
+          </div>
+          <div class="form-row" id="provinceRow" style="display: none;">
+            <label for="destinationProvince">Province/State:</label>
+            <select id="destinationProvince" name="destinationProvince"></select>
+          </div>
+          <div class="form-row">
+            <label for="specialty">Specialty:</label>
+            <select id="specialty" name="specialty"></select>
+          </div>
+          <div class="form-row" id="qualificationRow">
+            <label for="qualificationsSelect">Qualifications:</label>
+            <!-- Use a multi‑select to present qualifications in a more compact and organised way -->
+            <select id="qualificationsSelect" name="qualificationsSelect" multiple size="5" class="multi-select"></select>
+          </div>
+          <div class="form-row">
+            <label for="experience">Years of post‑certification experience:</label>
+            <input
+              type="number"
+              id="experience"
+              name="experience"
+              min="0"
+              step="0.5"
+              placeholder="e.g. 2"
+            />
+          </div>
+          <div class="form-row">
+            <button type="button" id="generateBtn" class="button">Generate route</button>
+          </div>
+
+          <!-- Additional controls for updates and analytics -->
+          <div class="form-row">
+            <button type="button" id="updateBtn" class="button">Check for updates</button>
+            <button type="button" id="analyticsBtn" class="button">Show analytics</button>
+          </div>
+        </form>
+      </section>
+      <section id="result-section" class="card" style="display: none;">
+        <h2 id="result-title">Suggested route</h2>
+        <p id="eligibility-message"></p>
+        <div id="steps-container"></div>
+        <p class="note">
+          <strong>Disclaimer:</strong> This guidance is based on publicly available
+          information and should not be considered legal advice. Always check
+          with the official regulator for the most up‑to‑date requirements.
+        </p>
+      </section>
+
+      <!-- Analytics section shows usage metrics for route generation -->
+      <section id="analytics-section" class="card" style="display: none;">
+        <h2>Usage analytics</h2>
+        <div id="analytics-container"></div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p>
+        &copy; <span id="year"></span> Merrick Global Ltd. All rights
+        reserved.
+      </p>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
