@@ -98,5 +98,53 @@
       </p>
     </footer>
     <script src="app.js"></script>
+
+        <script>
+      // Insert credential verification step for Canadian routes
+      function addCredentialVerificationSteps() {
+        if (!Array.isArray(ROUTES)) return;
+        ROUTES.forEach(route => {
+          if (route.destinationCountry === 'Canada') {
+            const firstTitle = route.steps && route.steps[0] && route.steps[0].title;
+            if (firstTitle && firstTitle.startsWith('Verify credentials')) {
+              return;
+            }
+            let verificationStep;
+            if (route.destinationProvince === 'Ontario') {
+              verificationStep = {
+                title: 'Verify credentials with CPSO portal',
+                description: 'Create a CPSO portal account, complete the self\u2011screening questionnaire and upload your credentials directly to CPSO. You may optionally share any previously verified documents from physiciansapply.ca to avoid duplicate verification.',
+                docs: ['CPSO portal account', 'Self\u2011screening questionnaire', 'Medical degree', 'Transcripts'],
+                fee: 'Varies',
+                timeWeeks: '4\u20118'
+              };
+            } else {
+              verificationStep = {
+                title: 'Verify credentials via physiciansapply.ca',
+                description: 'Create a physiciansapply.ca account and submit your medical credentials for source verification. Once verified, share your physiciansapply.ca file with the medical regulatory authority in your destination province. Start this process early as it can take several weeks.',
+                docs: ['physiciansapply.ca account', 'Medical degree', 'Transcripts', 'Internship certificate'],
+                fee: 'Varies (source verification fees)',
+                timeWeeks: '4\u201112'
+              };
+            }
+            route.steps.unshift(verificationStep);
+          }
+        });
+      }
+      // Run on initial load
+      if (typeof addCredentialVerificationSteps === 'function') {
+        addCredentialVerificationSteps();
+      }
+      // Wrap update function
+      if (typeof checkForUpdates === 'function') {
+        const originalCheckForUpdates = checkForUpdates;
+        window.checkForUpdates = async function() {
+          await originalCheckForUpdates.apply(this, arguments);
+          if (typeof addCredentialVerificationSteps === 'function') {
+            addCredentialVerificationSteps();
+          }
+        };
+      }
+    </script>
   </body>
 </html>
