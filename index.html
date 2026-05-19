@@ -1,150 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Merrick Global Talent Licensing Route Finder</title>
-    <link rel="stylesheet" href="style.css" />
-    <!-- Import a modern sans‑serif font for a polished, magazine‑style look -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <header class="app-header">
-      <!-- Brand logo pulled from the uploaded assets. The logo already conveys the company name so the page title can be shorter. -->
-      <img src="logo.png" class="logo" alt="Merrick Global Talent logo">
-      <h1>Licensing Route Finder</h1>
-      <p class="subtitle">
-        Find your personalised route to medical licensing based on your background and qualifications.
-      </p>
-    </header>
-    <main class="container">
-      <section id="input-section" class="card">
-        <h2>Your Background</h2>
-        <!-- Guidance for users on how to use the tool. Click the arrow to expand. -->
-        <details class="info-card" open>
-          <summary>How to use this tool</summary>
-          <p>
-            Choose your current country, where you want to practise, your specialty and qualifications, then enter your years of post‑certification experience. Click
-            <strong>Generate route</strong> to see the recommended steps for licensure. Use
-            <strong>Check for updates</strong> to ensure you have the latest information.<!-- Analytics are hidden for external users -->
-          </p>
-        </details>
-        <form id="route-form">
-          <div class="form-row">
-            <label for="incomingCountry">Current country:</label>
-            <select id="incomingCountry" name="incomingCountry"></select>
-          </div>
-          <div class="form-row">
-            <label for="destinationCountry">Destination country:</label>
-            <select id="destinationCountry" name="destinationCountry"></select>
-          </div>
-          <div class="form-row" id="provinceRow" style="display: none;">
-            <label for="destinationProvince">Province/State:</label>
-            <select id="destinationProvince" name="destinationProvince"></select>
-          </div>
-          <div class="form-row">
-            <label for="specialty">Specialty:</label>
-            <select id="specialty" name="specialty"></select>
-          </div>
-          <div class="form-row" id="qualificationRow">
-            <label for="qualificationsSelect">Qualifications:</label>
-            <!-- Use a multi‑select to present qualifications in a more compact and organised way -->
-            <select id="qualificationsSelect" name="qualificationsSelect" multiple size="5" class="multi-select"></select>
-          </div>
-          <div class="form-row">
-            <label for="experience">Years of post‑certification experience:</label>
-            <input
-              type="number"
-              id="experience"
-              name="experience"
-              min="0"
-              step="0.5"
-              placeholder="e.g. 2"
-            />
-          </div>
-          <div class="form-row">
-            <button type="button" id="generateBtn" class="button">Generate route</button>
-          </div>
-
-          <!-- Additional controls for updates and analytics -->
-          <div class="form-row">
-            <button type="button" id="updateBtn" class="button">Check for updates</button>
-            <button type="button" id="analyticsBtn" class="button">Show analytics</button>
-          </div>
-        </form>
-      </section>
-      <section id="result-section" class="card" style="display: none;">
-        <h2 id="result-title">Suggested route</h2>
-        <p id="eligibility-message"></p>
-        <div id="steps-container"></div>
-        <p class="note">
-          <strong>Disclaimer:</strong> This guidance is based on publicly available
-          information and should not be considered legal advice. Always check
-          with the official regulator for the most up‑to‑date requirements.
-        </p>
-      </section>
-
-      <!-- Analytics section shows usage metrics for route generation -->
-      <section id="analytics-section" class="card" style="display: none;">
-        <h2>Usage analytics</h2>
-        <div id="analytics-container"></div>
-      </section>
-    </main>
-    <footer class="footer">
-      <p>
-        &copy; <span id="year"></span> Merrick Global Ltd. All rights
-        reserved.
-      </p>
-    </footer>
-  <script src="app_updated.js"></script>
-
-        <script>
-      // Insert credential verification step for Canadian routes
-      function addCredentialVerificationSteps() {
-        if (!Array.isArray(ROUTES)) return;
-        ROUTES.forEach(route => {
-          if (route.destinationCountry === 'Canada') {
-            const firstTitle = route.steps && route.steps[0] && route.steps[0].title;
-            if (firstTitle && firstTitle.startsWith('Verify credentials')) {
-              return;
-            }
-            let verificationStep;
-            if (route.destinationProvince === 'Ontario') {
-              verificationStep = {
-                title: 'Verify credentials with CPSO portal',
-                description: 'Create a CPSO portal account, complete the self\u2011screening questionnaire and upload your credentials directly to CPSO. You may optionally share any previously verified documents from physiciansapply.ca to avoid duplicate verification.',
-                docs: ['CPSO portal account', 'Self\u2011screening questionnaire', 'Medical degree', 'Transcripts'],
-                fee: 'Varies',
-                timeWeeks: '4\u20118'
-              };
-            } else {
-              verificationStep = {
-                title: 'Verify credentials via physiciansapply.ca',
-                description: 'Create a physiciansapply.ca account and submit your medical credentials for source verification. Once verified, share your physiciansapply.ca file with the medical regulatory authority in your destination province. Start this process early as it can take several weeks.',
-                docs: ['physiciansapply.ca account', 'Medical degree', 'Transcripts', 'Internship certificate'],
-                fee: 'Varies (source verification fees)',
-                timeWeeks: '4\u201112'
-              };
-            }
-            route.steps.unshift(verificationStep);
-          }
-        });
-      }
-      // Run on initial load
-      if (typeof addCredentialVerificationSteps === 'function') {
-        addCredentialVerificationSteps();
-      }
-      // Wrap update function
-      if (typeof checkForUpdates === 'function') {
-        const originalCheckForUpdates = checkForUpdates;
-        window.checkForUpdates = async function() {
-          await originalCheckForUpdates.apply(this, arguments);
-          if (typeof addCredentialVerificationSteps === 'function') {
-            addCredentialVerificationSteps();
-          }
-        };
-      }
+    <title>Canada Physician Recruitment Partner | Merrick Global Talent</title>
+    <meta
+      name="description"
+      content="Merrick Global Talent helps Canadian clinics attract, assess and recruit internationally trained Family Physicians, GPs and Specialists through focused Canada physician recruitment support."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              navy: '#001A44',
+              turquoise: '#00A6CE',
+              grey: '#B1B3B2',
+            },
+            fontFamily: {
+              sans: ['Montserrat', 'ui-sans-serif', 'system-ui'],
+            },
+            boxShadow: {
+              card: '0 20px 40px rgba(0, 0, 0, 0.20)',
+            },
+          },
+        },
+      };
     </script>
+  </head>
+  <body class="bg-navy text-white font-sans antialiased">
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="app.js"></script>
   </body>
 </html>
